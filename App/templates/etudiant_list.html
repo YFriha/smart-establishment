@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display:flex; align-items:center; justify-content:center; margin:5%">
+  <h1>La liste des étudiants</h1>
+</div>
+<div class="container">
+  <form class="d-flex justify-content-center" role="search" action="{% url 'searchEtud' %}">
+    <input class='form-control me-2' type="search" placeholder="Search" aria-label="Search" name="keyword">
+    <button class="btn btn-outline-success" type="submit">Recherche</button>
+  </form>
+  <div class="row">
+    {% for etudiant in etudiants %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title" style="font-size:33px;">{{ etudiant.nom|upper }} {{ etudiant.prenom }}</h5>
+          <p class="card-text"><span style="color:#38c9d6;">CNE:</span> {{ etudiant.cne }}</p>
+          <p class="card-text"><span style="color:#38c9d6;">Genre:</span> {{ etudiant.genre }}</p>
+          <p class="card-text"><span style="color:#38c9d6;">Email:</span> {{ etudiant.email }}</p>
+          <p class="card-text"><span style="color:#38c9d6;">Telephone:</span> {{ etudiant.telephone }}</p>
+          <p class="card-text"><span style="color:#38c9d6;">Groupe:</span> {{ etudiant.groupe }}</p>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emailModal{{ forloop.counter }}">Send Email</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="emailModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="emailModalLabel{{ forloop.counter }}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="emailModalLabel{{ forloop.counter }}">Send Email to {{ etudiant.nom|upper }} {{ etudiant.prenom }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'send_email' %}">
+              {% csrf_token %}
+              <input type="hidden" name="student_id" value="{{ etudiant.id }}">
+              <div class="mb-3">
+                <label for="emailBody{{ forloop.counter }}" class="form-label">Email Body</label>
+                <textarea class="form-control" id="emailBody{{ forloop.counter }}" name="email_body" rows="5"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Send</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="paginatorDiv" >
+    {% if etudiants.has_previous %}
+        <a href="?page={{ etudiants.previous_page_number }}" class="btn btn-outline-primary">&laquo; Prev</a>
+    {% endif %}
+    {% if etudiants.number > 4 %}
+        <a href="?page=1" class="btn btn-outline-primary">1</a>
+        {% if etudiants.number > 5 %}
+            <span class="btn disabled">...</span>
+        {% endif %}
+    {% endif %}
+    {% for i in etudiants.paginator.page_range %}  
+        {% if etudiants.number == i %}
+            <span class="btn btn-primary active">{{ i }}</span>
+        {% elif i > etudiants.number|add:-3 and i < etudiants.number|add:3 %}
+            <a href="?page={{ i }}" class="btn btn-outline-primary" >{{ i }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if etudiants.number < etudiants.paginator.num_pages|add:-3 %}
+        {% if etudiants.number < etudiants.paginator.num_pages|add:-4 %}
+            <span class="btn disabled">...</span>
+        {% endif %}
+        <a href="?page={{ etudiants.paginator.num_pages }}" class="btn btn-outline-primary">{{ etudiants.paginator.num_pages }}</a>
+    {% endif %}
+    {% if etudiants.has_next %}
+        <a href="?page={{ etudiants.next_page_number }}" class="btn btn-outline-primary">Next &raquo;</a>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
+

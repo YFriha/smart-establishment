@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div>
+                <h1>Dashboard</h1>
+                {% load static %}
+                <div style="display: grid; grid-template-rows: 1fr auto;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; ">
+                        <img id="chartImage1" src="{% static chartP %}" alt="My image" style="height: 80%; margin-left: -10%;">
+                        <img id="chartImage2" src="{% static chart %}" alt="My image" style="height: 80%; margin-left: -10%;">
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <img id="chartImage3" src="{% static chartG %}" alt="My image" style="height: 80%; margin-left: -10%;">
+                    </div>
+                </div>
+                <a href="{% url 'generate_pdf' %}" class="btn btn-primary">Generate PDF</a>  <!-- Link to the PDF generation view -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
