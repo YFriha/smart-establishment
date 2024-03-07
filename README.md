@@ -1,0 +1,7 @@
+![img1](https://github.com/YFriha/smart-establishment/assets/128365797/ec6a1aa2-6ecb-4388-b1de-38662d8cba3d)
+![img2](https://github.com/YFriha/smart-establishment/assets/128365797/c7c4b884-4e30-46e8-a641-b7d8a987b49b)
+![img3](https://github.com/YFriha/smart-establishment/assets/128365797/8b59bc68-b2d3-4f6c-8bc8-6d575c6da971)
+![img4](https://github.com/YFriha/smart-establishment/assets/128365797/18b6fd37-bc89-4b98-8eb7-39f603ea9ff4)
+![img5 0](https://github.com/YFriha/smart-establishment/assets/128365797/5e2ded95-3125-4ece-aa53-4305a4ebebec)
+![img5](https://github.com/YFriha/smart-establishment/assets/128365797/43aa7603-c729-46d5-a2e3-9bace5b7cd0f)
+![img6](https://github.com/YFriha/smart-establishment/assets/128365797/ecb04949-15b7-4dcf-bbe7-9163d8612a1b)
